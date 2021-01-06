@@ -10,7 +10,7 @@ University Management System  starts with the registration of new staff and stud
 # IDE Used - NetBeans
 # Database Used - MySQL
 
-It is made with PROPER CODING and NO DRAG AND DROP
+# PROPER CODING and NO DRAG AND DROP
 ---------------------------------------------------------------------------------------------------------- 
 # For Source Code, Clone repository from Github
 https://github.com/NirajanWEB/University-Management-System
