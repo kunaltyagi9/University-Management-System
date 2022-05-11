@@ -13,7 +13,7 @@ public class AboutUs extends JFrame{
     
         public AboutUs() {
             
-            super("About Us - Sadhana University");
+            super("About Us - University Name");
             setBackground(new Color(173, 216, 230));
             setBounds(500, 250, 700, 500);
 		
@@ -49,17 +49,17 @@ public class AboutUs extends JFrame{
             contentPane.add(l5);
 
 
-            JLabel l6 = new JLabel("Developed By : Kavana S");
+            JLabel l6 = new JLabel("Developed By : Code for Interview");
             l6.setFont(new Font("Trebuchet MS", Font.BOLD, 30));
             l6.setBounds(70, 198, 600, 35);
             contentPane.add(l6);
 
-            JLabel l7 = new JLabel("Roll Number - 1533146");
+            JLabel l7 = new JLabel("Roll Number - ??");
             l7.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
             l7.setBounds(70, 260, 600, 34);
             contentPane.add(l7);
 
-            JLabel l8 = new JLabel("Contact : kavana@gmail.com");
+            JLabel l8 = new JLabel("Contact : codeforinterview01@gmail.com");
             l8.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
             l8.setBounds(70, 290, 600, 34);
             contentPane.add(l8);
