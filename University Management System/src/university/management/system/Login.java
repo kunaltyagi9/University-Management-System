@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package university.management.system;
-
 
 import java.awt.*;
 import javax.swing.*;
@@ -20,9 +14,6 @@ public class Login extends JFrame implements ActionListener{
     JButton b1,b2;
 
     Login(){
-
-        super("Login");
-
         setBackground(Color.white);
         setLayout(null);
 
@@ -71,7 +62,7 @@ public class Login extends JFrame implements ActionListener{
 
         setVisible(true);
         setSize(600,300);
-        setLocation(500,300);
+        setLocation(500,250);
 
     }
 

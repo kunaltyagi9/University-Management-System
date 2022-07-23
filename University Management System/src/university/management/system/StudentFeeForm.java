@@ -1,43 +1,43 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package university.management.system;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.event.*;
 import java.sql.*;
-import java.util.*;
 
 public class StudentFeeForm extends JFrame implements ActionListener{
 
-    private JPanel contentPane;
-    private JTextField t1,t2,t3;
-    private JComboBox comboBox, comboBox_1, comboBox_2, comboBox_3;
-    JButton b1,b2;
+    JComboBox comboBox, comboBox_1, comboBox_2, comboBox_3;
+    JButton b1,b2,b3;
     Choice c1;
+    JLabel lblprice;
 
     public static void main(String[] args) {
-        new StudentFeeForm().setVisible(true);
+        new StudentFeeForm();
     }
 
-
     public StudentFeeForm() {
-        super("Student Fee Form");
-	setBounds(700, 200, 550, 450);
-	contentPane = new JPanel();
-	contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-	setContentPane(contentPane);
-	contentPane.setLayout(null);
+        setBounds(300, 100, 900, 500);
+        setLayout(null);
+        getContentPane().setBackground(Color.WHITE);
         
+        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/fee.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(500, 300,Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i3);
+        image.setBounds(400, 50, 500, 300);
+        add(image);
+       
+        JLabel l1 = new JLabel("Select Roll No");
+	l1.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l1.setBounds(40, 60, 150, 20);
+	add(l1);
+
 	c1 = new Choice();
-        c1.setForeground(new Color(47, 79, 79));
-	c1.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	
-        
+        c1.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
+	c1.setBounds(200, 60, 150, 20);
+	add(c1);
+
         try{
             conn c = new conn();
             ResultSet rs = c.s.executeQuery("select * from student");
@@ -46,166 +46,136 @@ public class StudentFeeForm extends JFrame implements ActionListener{
             }
         }catch(Exception e) { }
         
-	JLabel l1 = new JLabel("Select Roll No");
-	l1.setForeground(new Color(25, 25, 112));
-	l1.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l1.setBounds(64, 63, 102, 22);
-	contentPane.add(l1);
-
 	JLabel l2 = new JLabel("Name");
-	l2.setForeground(new Color(25, 25, 112));
-	l2.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l2.setBounds(64, 97, 102, 22);
-	contentPane.add(l2);
+	l2.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l2.setBounds(40, 100, 150, 20);
+	add(l2);
+
+        JLabel lblname = new JLabel();
+	lblname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblname.setBounds(200, 100, 150, 20);
+	add(lblname);
 
 	JLabel l3 = new JLabel("Father's Name");
-	l3.setForeground(new Color(25, 25, 112));
-	l3.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l3.setBounds(64, 130, 102, 22);
-	contentPane.add(l3);
+	l3.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l3.setBounds(40, 140, 150, 20);
+	add(l3);
 
-	JLabel l4 = new JLabel("Branch");
-	l4.setForeground(new Color(25, 25, 112));
-	l4.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l4.setBounds(64, 209, 102, 22);
-	contentPane.add(l4);
-
-        JLabel l5 = new JLabel("Semester");
-	l5.setForeground(new Color(25, 25, 112));
-	l5.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l5.setBounds(64, 242, 102, 22);
-	contentPane.add(l5);
-
-	JLabel l6 = new JLabel("Total Payable");
-	l6.setForeground(new Color(25, 25, 112));
-	l6.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l6.setBounds(64, 275, 102, 22);
-	contentPane.add(l6);
-
-	c1.setBounds(174, 66, 156, 20);
-	contentPane.add(c1);
-
-	t2 = new JTextField();
-	t2.setForeground(new Color(47, 79, 79));
-	t2.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	t2.setColumns(10);
-	t2.setBounds(174, 100, 156, 20);
-	contentPane.add(t2);
-
-	t3 = new JTextField();
-	t3.setForeground(new Color(47, 79, 79));
-	t3.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	t3.setColumns(10);
-	t3.setBounds(174, 133, 156, 20);
-	contentPane.add(t3);
+	JLabel lblfname = new JLabel();
+	lblfname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	lblfname.setBounds(200, 140, 150, 20);
+	add(lblfname);
         
         try{
             conn c = new conn();
             ResultSet rs = c.s.executeQuery("select * from student where rollno = '"+c1.getSelectedItem()+"'");
             while(rs.next()){
-                t2.setText(rs.getString("name"));
-                t3.setText(rs.getString("fathers_name"));
+                lblname.setText(rs.getString("name"));
+                lblfname.setText(rs.getString("fname"));
             }
         }catch(Exception e){}
-
-	comboBox = new JComboBox();
-	comboBox.setModel(new DefaultComboBoxModel(new String[] { "Mechanical", "CSE", "IT", "Civil", "Automobile", "Electronics", "Other" }));
-	comboBox.setForeground(new Color(47, 79, 79));
-	comboBox.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	comboBox.setBounds(176, 211, 154, 20);
-	contentPane.add(comboBox);
-
-	comboBox_2 = new JComboBox();
-	comboBox_2.setModel(
-			new DefaultComboBoxModel(new String[] { "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th" }));
-	comboBox_2.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	comboBox_2.setForeground(new Color(47, 79, 79));
-	comboBox_2.setBounds(176, 244, 154, 20);
-	contentPane.add(comboBox_2);
         
-        t1 = new JTextField();
-	t1.setForeground(new Color(47, 79, 79));
-	t1.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	t1.setColumns(10);
-	t1.setBounds(176, 275, 154, 20);
-        add(t1);
+        JLabel l7 = new JLabel("Course");
+	l7.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l7.setBounds(40, 180, 150, 20);
+	add(l7);
+
+        String course[] = new String[] { "BTech", "MTech", "MBA", "BBA", "BCA", "BSc", "MSc", "Mcom", "Bcom", "MCA" };
+	comboBox_3 = new JComboBox(course);
+	comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	comboBox_3.setBounds(200, 180, 150, 20);
+	add(comboBox_3);
         
-	b1 = new JButton("Pay");
+	JLabel l4 = new JLabel("Branch");
+	l4.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l4.setBounds(40, 220, 150, 20);
+	add(l4);
+        
+        String courses[] = new String[] { "Mechanical", "CSE", "IT", "Civil", "Automobile", "Electronics", "Other" };
+	comboBox = new JComboBox(courses);
+	comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	comboBox.setBounds(200, 220, 150, 20);
+	add(comboBox);
+
+        JLabel l5 = new JLabel("Semester");
+	l5.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l5.setBounds(40, 260, 150, 20);
+	add(l5);
+        
+        String semester[] = new String[] { "Semester1", "Semester2", "Semester3", "Semester4", "Semester5", "Semester6", "Semester7", "Semester8" };
+	comboBox_2 = new JComboBox(semester);
+	comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	comboBox_2.setBounds(200, 260, 150, 20);
+	add(comboBox_2);
+
+	JLabel l6 = new JLabel("Total Payable");
+	l6.setFont(new Font("Tahoma", Font.BOLD, 16));
+	l6.setBounds(40, 300, 150, 20);
+	add(l6);
+        
+        lblprice = new JLabel();
+	lblprice.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        lblprice.setForeground(Color.RED);
+	lblprice.setBounds(200, 300, 150, 20);
+	add(lblprice);
+        
+	b1 = new JButton("Update");
 	b1.addActionListener(this);
-	b1.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	b1.setBounds(64, 321, 111, 33);
+	b1.setBounds(30, 380, 100, 25);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
-	contentPane.add(b1);
-
-	b2 = new JButton("Back");
+	add(b1);
+        
+        b2 = new JButton("Pay Fee");
 	b2.addActionListener(this);
-	b2.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	b2.setBounds(198, 321, 111, 33);
+	b2.setBounds(150, 380, 100, 25);
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
-	contentPane.add(b2);
+	add(b2);
 
-	JLabel l7 = new JLabel("Course");
-	l7.setForeground(new Color(25, 25, 112));
-	l7.setFont(new Font("Tahoma", Font.BOLD, 14));
-	l7.setBounds(64, 173, 102, 22);
-	contentPane.add(l7);
+	b3 = new JButton("Back");
+	b3.addActionListener(this);
+	b3.setBounds(270, 380, 120, 25);
+        b3.setBackground(Color.BLACK);
+        b3.setForeground(Color.WHITE);
+	add(b3);
 
-	comboBox_3 = new JComboBox();
-	comboBox_3.setModel(new DefaultComboBoxModel(
-			new String[] { "B.Tech", "M.Tech", "MBA", "BBA", "BCA", "B.Sc", "MCA" }));
-	comboBox_3.setForeground(new Color(47, 79, 79));
-	comboBox_3.setFont(new Font("Trebuchet MS", Font.BOLD, 14));
-	comboBox_3.setBounds(176, 176, 154, 20);
-	contentPane.add(comboBox_3);
-
-	JPanel panel = new JPanel();
-	panel.setBorder(new TitledBorder(new LineBorder(new Color(102, 205, 170), 2, true), "Fee-Form",
-			TitledBorder.LEADING, TitledBorder.TOP, null, new Color(30, 144, 255)));
-	panel.setBackground(new Color(211, 211, 211));
-	panel.setBounds(10, 38, 358, 348);
-        
-        contentPane.setBackground(Color.WHITE);
-        panel.setBackground(Color.WHITE);
-        
-	contentPane.add(panel);
+	setVisible(true);
 
     }
     
     public void actionPerformed(ActionEvent ae){
-        try{
-            
-            if(ae.getSource() == b1){
-                try{
+        if (ae.getSource() == b1) {
+            String degree = (String) comboBox_3.getSelectedItem();
+            String semester = (String) comboBox_2.getSelectedItem();
+            try{
                 conn con = new conn();
-                String sql = "insert into fee(rollno, name, fathers_name, course, branch, semester, fee_paid) values(?, ?, ?, ?, ?, ?, ?)";
-		PreparedStatement st = con.c.prepareStatement(sql);
-		st.setString(1, c1.getSelectedItem());
-		st.setString(2, t2.getText());
-		st.setString(3, t3.getText());
-		st.setString(4, (String) comboBox_3.getSelectedItem());
-		st.setString(5, (String) comboBox.getSelectedItem());
-		st.setString(6, (String) comboBox_2.getSelectedItem());
-		st.setString(7, t1.getText());
-
-		int i = st.executeUpdate();
-		if (i > 0){
-                    JOptionPane.showMessageDialog(null, "Successfully Paid");
-                    this.setVisible(false);
+                String query = "select * from fee where course ='"+degree+"'";
+                ResultSet rs = con.s.executeQuery(query);
+                    
+                if (rs.next()) {
+                    lblprice.setText(rs.getString(semester));
                 }
-		else
-                    JOptionPane.showMessageDialog(null, "error");
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+            }catch(Exception e){
+                e.printStackTrace();
             }
-            
-            if(ae.getSource() == b2){
-                this.setVisible(false);
+        } else if(ae.getSource() == b2){
+            String rollno = c1.getSelectedItem();
+            String degree = (String) comboBox_3.getSelectedItem();
+            String branch = (String) comboBox.getSelectedItem();
+            String semester = (String) comboBox_2.getSelectedItem();
+            String price = lblprice.getText();
+            try{
+                conn con = new conn();
+                String query = "insert into educationFee values('"+rollno+"', '"+degree+"', '"+branch+"', '"+semester+"', '"+price+"')";
+                con.s.executeUpdate(query);
+		JOptionPane.showMessageDialog(null, "Fees Paid Successfully");
+                setVisible(false);
+            }catch(Exception e){
+                e.printStackTrace();
             }
-        }catch(Exception e){
-            
+        } else if (ae.getSource() == b3){
+            setVisible(false);
         }
     }
 }
