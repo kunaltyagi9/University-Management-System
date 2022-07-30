@@ -13,6 +13,7 @@ public class AboutUs extends JFrame{
     
         public AboutUs() {
             
+            super("About Us - University Name");
             setBackground(new Color(173, 216, 230));
             setBounds(400, 150, 700, 500);
 		
@@ -39,7 +40,7 @@ public class AboutUs extends JFrame{
             l6.setBounds(70, 220, 600, 35);
             contentPane.add(l6);
 
-            JLabel l7 = new JLabel("Roll Number - 1533146");
+            JLabel l7 = new JLabel("Roll Number - ??");
             l7.setFont(new Font("Trebuchet MS", Font.BOLD, 20));
             l7.setBounds(70, 280, 600, 34);
             contentPane.add(l7);
