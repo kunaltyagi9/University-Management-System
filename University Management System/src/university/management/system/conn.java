@@ -1,19 +1,20 @@
 package university.management.system;
 
-import java.sql.*;  
+import java.sql.*;
 
-public class conn{
+public class Conn {
+    
     Connection c;
     Statement s;
-    public conn(){  
-        try{  
-            Class.forName("com.mysql.cj.jdbc.Driver");  
-            c =DriverManager.getConnection("jdbc:mysql:///ums","root","codeforinterview");    
-            s =c.createStatement();  
+
+    Conn () {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            c = DriverManager.getConnection("jdbc:mysql:///universitymanagementsystem", "root", "codeforinterview");
+            s = c.createStatement();
             
-           
-        }catch(Exception e){ 
-            System.out.println(e);
-        }  
-    }  
-}  
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}

@@ -1,109 +1,110 @@
 package university.management.system;
 
-import java.sql.*;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.sql.*;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.*;
 
-public class StudentLeave extends JFrame implements ActionListener{
+public class StudentLeave extends JFrame implements ActionListener {
+
+    Choice crollno, ctime;
+    JDateChooser dcdate;
+    JButton submit, cancel;
     
-    JButton b1,b2;
-    Choice time, rollnumber;
-    JDateChooser date;
-    
-    StudentLeave(){
-        setSize(500,550);
-        setLocation(600,100);
+    StudentLeave() {
+        
+        setSize(500, 550);
+        setLocation(550, 100);
         setLayout(null);
-        
-        JLabel l1 = new JLabel("Apply Leave (Student)");
-        l1.setFont(new Font("Tahoma", Font.BOLD, 20));
-        l1.setBounds(40, 50, 200, 30);
-        add(l1);
-        
-        JLabel l2 = new JLabel("Roll Number");
-        l2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        l2.setBounds(60, 100, 200, 20);
-        add(l2);
-        
-        rollnumber = new Choice();
-        rollnumber.setBounds(60, 130, 200, 30);
-        add(rollnumber);
-        
-        try{
-            conn c = new conn();
-            ResultSet rs = c.s.executeQuery("select * from student");
-            while(rs.next()){
-                rollnumber.add(rs.getString("rollno"));    
-            }
-      
-      
-       }catch(Exception e){ }
-       
-        
-        JLabel l3 = new JLabel("Date");
-        l3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        l3.setBounds(60, 180, 200, 20);
-        add(l3);
-        
-        date = new JDateChooser();
-        date.setBounds(60, 210, 200, 25);
-        add(date);
-        
-        JLabel l4 = new JLabel("Time");
-        l4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        l4.setBounds(60, 260, 200, 20);
-        add(l4);
-        
-        time = new Choice();
-        time.add("Full Day");
-        time.add("Half Day");
-        time.setBounds(60, 290, 200, 25);
-        add(time);
-       
-        b1 =new JButton("Submit");
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
-        b1.setBounds(60, 350, 100, 25);
-        b1.addActionListener(this);
-        add(b1);
-        
-        b2 = new JButton("Cancel");
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
-        b2.setBounds(200, 350, 100, 25);
-        b2.addActionListener(this);
-        add(b2);
-        
         
         getContentPane().setBackground(Color.WHITE);
         
+        JLabel heading = new JLabel("Apply Leave (Student)");
+        heading.setBounds(40, 50, 300, 30);
+        heading.setFont(new Font("Tahoma", Font.BOLD, 20));
+        add(heading);
+        
+        JLabel lblrollno = new JLabel("Search by Roll Number");
+        lblrollno.setBounds(60, 100, 200, 20);
+        lblrollno.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(lblrollno);
+        
+        crollno = new Choice();
+        crollno.setBounds(60, 130, 200, 20);
+        add(crollno);
+        
+        try {
+            Conn c = new Conn();
+            ResultSet rs = c.s.executeQuery("select * from student");
+            while(rs.next()) {
+                crollno.add(rs.getString("rollno"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        JLabel lbldate = new JLabel("Date");
+        lbldate.setBounds(60, 180, 200, 20);
+        lbldate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(lbldate);
+        
+        dcdate = new JDateChooser();
+        dcdate.setBounds(60, 210, 200, 25);
+        add(dcdate);
+        
+        JLabel lbltime = new JLabel("Time Duration");
+        lbltime.setBounds(60, 260, 200, 20);
+        lbltime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(lbltime);
+        
+        ctime = new Choice();
+        ctime.setBounds(60, 290, 200, 20);
+        ctime.add("Full Day");
+        ctime.add("Half Day");
+        add(ctime);
+        
+        submit = new JButton("Submit");
+        submit.setBounds(60, 350, 100, 25);
+        submit.setBackground(Color.BLACK);
+        submit.setForeground(Color.WHITE);
+        submit.addActionListener(this);
+        submit.setFont(new Font("Tahoma", Font.BOLD, 15));
+        add(submit);
+        
+        cancel = new JButton("Cancel");
+        cancel.setBounds(200, 350, 100, 25);
+        cancel.setBackground(Color.BLACK);
+        cancel.setForeground(Color.WHITE);
+        cancel.addActionListener(this);
+        cancel.setFont(new Font("Tahoma", Font.BOLD, 15));
+        add(cancel);
+        
         setVisible(true);
-       
     }
     
-    public void actionPerformed(ActionEvent ae){
-        if (ae.getSource() == b1) {
-            String rollno = rollnumber.getSelectedItem();
-            String dateofleave = ((JTextField) date.getDateEditor().getUiComponent()).getText();
-            String leavetime = time.getSelectedItem();
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == submit) {
+            String rollno = crollno.getSelectedItem();
+            String date = ((JTextField) dcdate.getDateEditor().getUiComponent()).getText();
+            String duration = ctime.getSelectedItem();
             
-            String query = "insert into studentleave values('"+rollno+"','"+dateofleave+"','"+leavetime+"')";
-       
-            try{
-                conn c1 = new conn();
-                c1.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null,"Leave Confirmed");
+            String query = "insert into studentleave values('"+rollno+"', '"+date+"', '"+duration+"')";
+            
+            try {
+                Conn c = new Conn();
+                c.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Leave Confirmed");
                 setVisible(false);
-            }catch(Exception ee){
-                ee.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             setVisible(false);
         }
-    }    
-    public static void main(String s[]){
+    }
+
+    public static void main(String[] args) {
         new StudentLeave();
     }
 }

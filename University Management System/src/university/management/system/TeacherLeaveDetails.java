@@ -6,29 +6,30 @@ import java.sql.*;
 import net.proteanit.sql.DbUtils;
 import java.awt.event.*;
 
-public class TeacherLeaveDetails extends JFrame implements ActionListener{
+public class TeacherLeaveDetails extends JFrame implements ActionListener {
 
+    Choice cEmpId;
     JTable table;
-    Choice cemployeeId;
-    JButton search, print, add, update, back;
+    JButton search, print, cancel;
     
     TeacherLeaveDetails() {
+        
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
         
-        JLabel searchlbl = new JLabel("Search by Employee id");
-        searchlbl.setBounds(20, 20, 150, 20);
-        add(searchlbl);
+        JLabel heading = new JLabel("Search by Employee Id");
+        heading.setBounds(20, 20, 150, 20);
+        add(heading);
         
-        cemployeeId = new Choice();
-        cemployeeId.setBounds(180, 20, 150, 20);
-        add(cemployeeId);
+        cEmpId = new Choice();
+        cEmpId.setBounds(180, 20, 150, 20);
+        add(cEmpId);
         
         try {
-            conn c = new conn();
+            Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from teacher");
             while(rs.next()) {
-                cemployeeId.add(rs.getString("empId"));
+                cEmpId.add(rs.getString("empId"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,7 +38,7 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener{
         table = new JTable();
         
         try {
-            conn c = new conn();
+            Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from teacherleave");
             table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
@@ -58,10 +59,10 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener{
         print.addActionListener(this);
         add(print);
         
-        back = new JButton("Back");
-        back.setBounds(220, 70, 80, 20);
-        back.addActionListener(this);
-        add(back);
+        cancel = new JButton("Cancel");
+        cancel.setBounds(220, 70, 80, 20);
+        cancel.addActionListener(this);
+        add(cancel);
         
         setSize(900, 700);
         setLocation(300, 100);
@@ -70,9 +71,9 @@ public class TeacherLeaveDetails extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == search) {
-            String query = "select * from teacher where rollno = '"+cemployeeId.getSelectedItem()+"'";
+            String query = "select * from teacherleave where rollno = '"+cEmpId.getSelectedItem()+"'";
             try {
-                conn c = new conn();
+                Conn c = new Conn();
                 ResultSet rs = c.s.executeQuery(query);
                 table.setModel(DbUtils.resultSetToTableModel(rs));
             } catch (Exception e) {

@@ -1,182 +1,204 @@
 package university.management.system;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
 import java.sql.*;
+import java.awt.event.*;
 
-public class StudentFeeForm extends JFrame implements ActionListener{
+public class StudentFeeForm extends JFrame implements ActionListener {
 
-    JComboBox comboBox, comboBox_1, comboBox_2, comboBox_3;
-    JButton b1,b2,b3;
-    Choice c1;
-    JLabel lblprice;
-
-    public static void main(String[] args) {
-        new StudentFeeForm();
-    }
-
-    public StudentFeeForm() {
-        setBounds(300, 100, 900, 500);
+    Choice crollno;
+    JComboBox cbcourse, cbbranch, cbsemester;
+    JLabel labeltotal;
+    JButton update, pay, back;
+    
+    StudentFeeForm() {
+        setSize(900, 500);
+        setLocation(300, 100);
         setLayout(null);
+        
         getContentPane().setBackground(Color.WHITE);
         
-        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/fee.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(500, 300,Image.SCALE_DEFAULT);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/fee.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(500, 300, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
         image.setBounds(400, 50, 500, 300);
         add(image);
-       
-        JLabel l1 = new JLabel("Select Roll No");
-	l1.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l1.setBounds(40, 60, 150, 20);
-	add(l1);
-
-	c1 = new Choice();
-        c1.setFont(new Font("Trebuchet MS", Font.PLAIN, 16));
-	c1.setBounds(200, 60, 150, 20);
-	add(c1);
-
-        try{
-            conn c = new conn();
+        
+        JLabel lblrollnumber = new JLabel("Select Roll No");
+        lblrollnumber.setBounds(40, 60, 150, 20);
+        lblrollnumber.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lblrollnumber);
+        
+        crollno = new Choice();
+        crollno.setBounds(200, 60, 150, 20);
+        add(crollno);
+        
+        try {
+            Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from student");
-            while(rs.next()){
-                c1.add(rs.getString("rollno"));
+            while(rs.next()) {
+                crollno.add(rs.getString("rollno"));
             }
-        }catch(Exception e) { }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
-	JLabel l2 = new JLabel("Name");
-	l2.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l2.setBounds(40, 100, 150, 20);
-	add(l2);
-
-        JLabel lblname = new JLabel();
-	lblname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	lblname.setBounds(200, 100, 150, 20);
-	add(lblname);
-
-	JLabel l3 = new JLabel("Father's Name");
-	l3.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l3.setBounds(40, 140, 150, 20);
-	add(l3);
-
-	JLabel lblfname = new JLabel();
-	lblfname.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	lblfname.setBounds(200, 140, 150, 20);
-	add(lblfname);
+        JLabel lblname = new JLabel("Name");
+        lblname.setBounds(40, 100, 150, 20);
+        lblname.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lblname);
         
-        try{
-            conn c = new conn();
-            ResultSet rs = c.s.executeQuery("select * from student where rollno = '"+c1.getSelectedItem()+"'");
-            while(rs.next()){
-                lblname.setText(rs.getString("name"));
-                lblfname.setText(rs.getString("fname"));
+        JLabel labelname = new JLabel();
+        labelname.setBounds(200, 100, 150, 20);
+        labelname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        add(labelname);
+        
+        JLabel lblfname = new JLabel("Father's Name");
+        lblfname.setBounds(40, 140, 150, 20);
+        lblfname.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lblfname);
+        
+        JLabel labelfname = new JLabel();
+        labelfname.setBounds(200, 140, 150, 20);
+        labelfname.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        add(labelfname);
+        
+        try {
+            Conn c = new Conn();
+            String query = "select * from student where rollno='"+crollno.getSelectedItem()+"'";
+            ResultSet rs = c.s.executeQuery(query);
+            while(rs.next()) {
+                labelname.setText(rs.getString("name"));
+                labelfname.setText(rs.getString("fname"));
             }
-        }catch(Exception e){}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         
-        JLabel l7 = new JLabel("Course");
-	l7.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l7.setBounds(40, 180, 150, 20);
-	add(l7);
-
-        String course[] = new String[] { "BTech", "MTech", "MBA", "BBA", "BCA", "BSc", "MSc", "Mcom", "Bcom", "MCA" };
-	comboBox_3 = new JComboBox(course);
-	comboBox_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	comboBox_3.setBounds(200, 180, 150, 20);
-	add(comboBox_3);
+        crollno.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent ie) {
+                try {
+                    Conn c = new Conn();
+                    String query = "select * from student where rollno='"+crollno.getSelectedItem()+"'";
+                    ResultSet rs = c.s.executeQuery(query);
+                    while(rs.next()) {
+                        labelname.setText(rs.getString("name"));
+                        labelfname.setText(rs.getString("fname"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         
-	JLabel l4 = new JLabel("Branch");
-	l4.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l4.setBounds(40, 220, 150, 20);
-	add(l4);
+        JLabel lblcourse = new JLabel("Course");
+        lblcourse.setBounds(40, 180, 150, 20);
+        lblcourse.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lblcourse);
         
-        String courses[] = new String[] { "Mechanical", "CSE", "IT", "Civil", "Automobile", "Electronics", "Other" };
-	comboBox = new JComboBox(courses);
-	comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	comboBox.setBounds(200, 220, 150, 20);
-	add(comboBox);
-
-        JLabel l5 = new JLabel("Semester");
-	l5.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l5.setBounds(40, 260, 150, 20);
-	add(l5);
+        String course[] = {"BTech", "BBA", "BCA", "Bsc", "Msc", "MBA", "MCA", "MCom", "MA", "BA"};
+        cbcourse = new JComboBox(course);
+        cbcourse.setBounds(200, 180, 150, 20);
+        cbcourse.setBackground(Color.WHITE);
+        add(cbcourse);
         
-        String semester[] = new String[] { "Semester1", "Semester2", "Semester3", "Semester4", "Semester5", "Semester6", "Semester7", "Semester8" };
-	comboBox_2 = new JComboBox(semester);
-	comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	comboBox_2.setBounds(200, 260, 150, 20);
-	add(comboBox_2);
-
-	JLabel l6 = new JLabel("Total Payable");
-	l6.setFont(new Font("Tahoma", Font.BOLD, 16));
-	l6.setBounds(40, 300, 150, 20);
-	add(l6);
+        JLabel lblbranch = new JLabel("Branch");
+        lblbranch.setBounds(40, 220, 150, 20);
+        lblbranch.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lblbranch);
         
-        lblprice = new JLabel();
-	lblprice.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        lblprice.setForeground(Color.RED);
-	lblprice.setBounds(200, 300, 150, 20);
-	add(lblprice);
+        String branch[] = {"Computer Science", "Electronics", "Mechanical", "Civil", "IT"};
+        cbbranch = new JComboBox(branch);
+        cbbranch.setBounds(200, 220, 150, 20);
+        cbbranch.setBackground(Color.WHITE);
+        add(cbbranch);
         
-	b1 = new JButton("Update");
-	b1.addActionListener(this);
-	b1.setBounds(30, 380, 100, 25);
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
-	add(b1);
+        JLabel lblsemester = new JLabel("Semester");
+        lblsemester.setBounds(40, 260, 150, 20);
+        lblsemester.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lblsemester);
         
-        b2 = new JButton("Pay Fee");
-	b2.addActionListener(this);
-	b2.setBounds(150, 380, 100, 25);
-        b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
-	add(b2);
-
-	b3 = new JButton("Back");
-	b3.addActionListener(this);
-	b3.setBounds(270, 380, 120, 25);
-        b3.setBackground(Color.BLACK);
-        b3.setForeground(Color.WHITE);
-	add(b3);
-
-	setVisible(true);
-
+        String semester[] = {"Semester1", "Semester2", "Semester3", "Semester4", "Semester5", "Semester6", "Semester7", "Semester8" };
+        cbsemester = new JComboBox(semester);
+        cbsemester.setBounds(200, 260, 150, 20);
+        cbsemester.setBackground(Color.WHITE);
+        add(cbsemester);
+        
+        JLabel lbltotal = new JLabel("Total Payable");
+        lbltotal.setBounds(40, 300, 150, 20);
+        lbltotal.setFont(new Font("Tahoma", Font.BOLD, 16));
+        add(lbltotal);
+        
+        labeltotal = new JLabel();
+        labeltotal.setBounds(200, 300, 150, 20);
+        labeltotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        add(labeltotal);
+        
+        update = new JButton("Update");
+        update.setBounds(30, 380, 100, 25);
+        update.setBackground(Color.BLACK);
+        update.setForeground(Color.WHITE);
+        update.addActionListener(this);
+        add(update);
+        
+        pay = new JButton("Pay Fee");
+        pay.setBounds(150, 380, 100, 25);
+        pay.setBackground(Color.BLACK);
+        pay.setForeground(Color.WHITE);
+        pay.addActionListener(this);
+        pay.setFont(new Font("Tahoma", Font.BOLD, 15));
+        add(pay);
+        
+        back = new JButton("Back");
+        back.setBounds(270, 380, 100, 25);
+        back.setBackground(Color.BLACK);
+        back.setForeground(Color.WHITE);
+        back.addActionListener(this);
+        back.setFont(new Font("Tahoma", Font.BOLD, 15));
+        add(back);
+        
+        setVisible(true);
     }
     
-    public void actionPerformed(ActionEvent ae){
-        if (ae.getSource() == b1) {
-            String degree = (String) comboBox_3.getSelectedItem();
-            String semester = (String) comboBox_2.getSelectedItem();
-            try{
-                conn con = new conn();
-                String query = "select * from fee where course ='"+degree+"'";
-                ResultSet rs = con.s.executeQuery(query);
-                    
-                if (rs.next()) {
-                    lblprice.setText(rs.getString(semester));
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == update) {
+            String course = (String) cbcourse.getSelectedItem();
+            String semester = (String) cbsemester.getSelectedItem();
+            try {
+                Conn c = new Conn();
+                ResultSet rs = c.s.executeQuery("select * from fee where course = '"+course+"'");
+                while(rs.next()) {
+                    labeltotal.setText(rs.getString(semester));
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if(ae.getSource() == b2){
-            String rollno = c1.getSelectedItem();
-            String degree = (String) comboBox_3.getSelectedItem();
-            String branch = (String) comboBox.getSelectedItem();
-            String semester = (String) comboBox_2.getSelectedItem();
-            String price = lblprice.getText();
-            try{
-                conn con = new conn();
-                String query = "insert into educationFee values('"+rollno+"', '"+degree+"', '"+branch+"', '"+semester+"', '"+price+"')";
-                con.s.executeUpdate(query);
-		JOptionPane.showMessageDialog(null, "Fees Paid Successfully");
+        } else if (ae.getSource() == pay) {
+            String rollno = crollno.getSelectedItem();
+            String course = (String) cbcourse.getSelectedItem();
+            String semester = (String) cbsemester.getSelectedItem();
+            String branch = (String) cbbranch.getSelectedItem();
+            String total = labeltotal.getText();
+            
+            try {
+                Conn c = new Conn();
+                
+                String query = "insert into collegefee values('"+rollno+"', '"+course+"', '"+branch+"', '"+semester+"', '"+total+"')";
+                c.s.executeUpdate(query);
+                
+                JOptionPane.showMessageDialog(null, "College fee submitted successfully");
                 setVisible(false);
-            }catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else if (ae.getSource() == b3){
+        } else {
             setVisible(false);
         }
     }
-}
 
+    public static void main(String[] args) {
+        new StudentFeeForm();
+    }
+}

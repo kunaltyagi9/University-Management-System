@@ -1,240 +1,218 @@
 package university.management.system;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
-public class Project extends JFrame implements ActionListener{
-    Project(){
-        setSize(1540,850);
-        
-        ImageIcon ic =  new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/third.jpg"));
-        Image i3 = ic.getImage().getScaledInstance(1500, 750,Image.SCALE_DEFAULT);
-        ImageIcon icc3 = new ImageIcon(i3);
-        JLabel l1 = new JLabel(icc3);
-        add(l1);
-        
-        JMenuBar mb  = new JMenuBar();
-        
-        //master
-        JMenu master = new JMenu("New Information");
-        master.setForeground(Color.BLUE);
-        
-        JMenuItem m1 = new JMenuItem("New Faculty Information");
-        m1.setBackground(Color.WHITE);
-        m1.addActionListener(this);
-        master.add(m1);
-        
-        JMenuItem m2 = new JMenuItem("New Student Information");
-        m2.setBackground(Color.WHITE);
-        m2.addActionListener(this);
-        master.add(m2);
-        
-        //details
-        JMenu user = new JMenu("View Details");
-        user.setForeground(Color.RED);
-        
-        JMenuItem u1 = new JMenuItem("View Student Details");
-        u1.setBackground(Color.WHITE);
-        u1.addActionListener(this);
-        user.add(u1);
-        
-        JMenuItem u2 = new JMenuItem("View Teacher Details");
-        u2.setBackground(Color.WHITE);
-        u2.addActionListener(this);
-        user.add(u2);
-        
-        //attendance
-        JMenu attendance = new JMenu("Apply Leave");
-        attendance.setForeground(Color.BLUE);
-        
-        JMenuItem a1 = new JMenuItem("Student Leave");
-        a1.setBackground(Color.WHITE);
-        a1.addActionListener(this);
-        attendance.add(a1);
-        
-        JMenuItem a2 = new JMenuItem("Teacher Leave");
-        a2.setBackground(Color.WHITE);
-        a2.addActionListener(this);
-        attendance.add(a2);
+public class Project extends JFrame implements ActionListener {
 
-        //details
-        JMenu attendance_detail = new JMenu("Leave Details");
-        attendance_detail.setForeground(Color.RED);
+    Project() {
+        setSize(1540, 850);
         
-        JMenuItem b1 = new JMenuItem("Student Leave Details");
-        b1.setBackground(Color.WHITE);
-        b1.addActionListener(this);
-        attendance_detail.add(b1);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/third.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel image = new JLabel(i3);
+        add(image);
         
-        JMenuItem b2 = new JMenuItem("Teacher Leave Details");
-        b2.setBackground(Color.WHITE);
-        b2.addActionListener(this);
-        attendance_detail.add(b2);
-
-        //exams
+        JMenuBar mb = new JMenuBar();
+        
+        // New Information
+        JMenu newInformation = new JMenu("New Information");
+        newInformation.setForeground(Color.BLUE);
+        mb.add(newInformation);
+        
+        JMenuItem facultyInfo = new JMenuItem("New Faculty Information");
+        facultyInfo.setBackground(Color.WHITE);
+        facultyInfo.addActionListener(this);
+        newInformation.add(facultyInfo);
+        
+        JMenuItem studentInfo = new JMenuItem("New Student Information");
+        studentInfo.setBackground(Color.WHITE);
+        studentInfo.addActionListener(this);
+        newInformation.add(studentInfo);
+        
+        // Details
+        JMenu details = new JMenu("View Details");
+        details.setForeground(Color.RED);
+        mb.add(details);
+        
+        JMenuItem facultydetails = new JMenuItem("View Faculty Details");
+        facultydetails.setBackground(Color.WHITE);
+        facultydetails.addActionListener(this);
+        details.add(facultydetails);
+        
+        JMenuItem studentdetails = new JMenuItem("View Student Details");
+        studentdetails.setBackground(Color.WHITE);
+        studentdetails.addActionListener(this);
+        details.add(studentdetails);
+        
+        // Leave
+        JMenu leave = new JMenu("Apply Leave");
+        leave.setForeground(Color.BLUE);
+        mb.add(leave);
+        
+        JMenuItem facultyleave = new JMenuItem("Faculty Leave");
+        facultyleave.setBackground(Color.WHITE);
+        facultyleave.addActionListener(this);
+        leave.add(facultyleave);
+        
+        JMenuItem studentleave = new JMenuItem("Student Leave");
+        studentleave.setBackground(Color.WHITE);
+        studentleave.addActionListener(this);
+        leave.add(studentleave);
+        
+        // Leave Details
+        JMenu leaveDetails = new JMenu("Leave Details");
+        leaveDetails.setForeground(Color.RED);
+        mb.add(leaveDetails);
+        
+        JMenuItem facultyleavedetails = new JMenuItem("Faculty Leave Details");
+        facultyleavedetails.setBackground(Color.WHITE);
+        facultyleavedetails.addActionListener(this);
+        leaveDetails.add(facultyleavedetails);
+        
+        JMenuItem studentleavedetails = new JMenuItem("Student Leave Details");
+        studentleavedetails.setBackground(Color.WHITE);
+        studentleavedetails.addActionListener(this);
+        leaveDetails.add(studentleavedetails);
+        
+        // Exams
         JMenu exam = new JMenu("Examination");
         exam.setForeground(Color.BLUE);
+        mb.add(exam);
         
-        JMenuItem c1 = new JMenuItem("Examination Details");
-        c1.setBackground(Color.WHITE);
-        c1.addActionListener(this);
-        exam.add(c1);
+        JMenuItem examinationdetails = new JMenuItem("Examination Results");
+        examinationdetails.setBackground(Color.WHITE);
+        examinationdetails.addActionListener(this);
+        exam.add(examinationdetails);
         
-        JMenuItem c2 = new JMenuItem("Enter Marks");
-        c2.setBackground(Color.WHITE);
-        c2.addActionListener(this);
-        exam.add(c2);
-
-        //update
-        JMenu report = new JMenu("Update Details");
-        report.setForeground(Color.RED);
+        JMenuItem entermarks = new JMenuItem("Enter Marks");
+        entermarks.setBackground(Color.WHITE);
+        entermarks.addActionListener(this);
+        exam.add(entermarks);
         
-        JMenuItem r1 = new JMenuItem("Update Students Details");
-        r1.setBackground(Color.WHITE);
-        r1.addActionListener(this);
-        report.add(r1);
+        // UpdateInfo
+        JMenu updateInfo = new JMenu("Update Details");
+        updateInfo.setForeground(Color.RED);
+        mb.add(updateInfo);
         
-        JMenuItem r2 = new JMenuItem("Update Teachers Details");
-        r2.setBackground(Color.WHITE);
-        r2.addActionListener(this);
-        report.add(r2);
+        JMenuItem updatefacultyinfo = new JMenuItem("Update Faculty Details");
+        updatefacultyinfo.setBackground(Color.WHITE);
+        updatefacultyinfo.addActionListener(this);
+        updateInfo.add(updatefacultyinfo);
         
-        //fee
+        JMenuItem updatestudentinfo = new JMenuItem("Update Student Details");
+        updatestudentinfo.setBackground(Color.WHITE);
+        updatestudentinfo.addActionListener(this);
+        updateInfo.add(updatestudentinfo);
+        
+        // fee
         JMenu fee = new JMenu("Fee Details");
         fee.setForeground(Color.BLUE);
+        mb.add(fee);
         
-        JMenuItem s1 = new JMenuItem("Fee Structure");
-        s1.setBackground(Color.WHITE);
-        s1.addActionListener(this);
-        fee.add(s1);
+        JMenuItem feestructure = new JMenuItem("Fee Structure");
+        feestructure.setBackground(Color.WHITE);
+        feestructure.addActionListener(this);
+        fee.add(feestructure);
         
-        JMenuItem s2 = new JMenuItem("Student Fee Form");
-        s2.setBackground(Color.WHITE);
-        s2.addActionListener(this);
-        fee.add(s2);
+        JMenuItem feeform = new JMenuItem("Student Fee Form");
+        feeform.setBackground(Color.WHITE);
+        feeform.addActionListener(this);
+        fee.add(feeform);
         
-        //utility
+        // Utility
         JMenu utility = new JMenu("Utility");
-        utility.setForeground(Color.RED); 
+        utility.setForeground(Color.RED);
+        mb.add(utility);
         
-        JMenuItem ut1 = new JMenuItem("Notepad");
-        ut1.setBackground(Color.WHITE);
-        ut1.addActionListener(this);
-        utility.add(ut1);
+        JMenuItem notepad = new JMenuItem("Notepad");
+        notepad.setBackground(Color.WHITE);
+        notepad.addActionListener(this);
+        utility.add(notepad);
         
-        JMenuItem ut2 = new JMenuItem("Calculator");
-        ut2.setBackground(Color.WHITE);
-        ut2.addActionListener(this);
-        utility.add(ut2);
+        JMenuItem calc = new JMenuItem("Calculator");
+        calc.setBackground(Color.WHITE);
+        calc.addActionListener(this);
+        utility.add(calc);
         
-        JMenuItem ut3 = new JMenuItem("Web Browser");
-        ut3.setBackground(Color.WHITE);
-        ut3.addActionListener(this);
-        utility.add(ut3);
-        
-        //about
+        // about
         JMenu about = new JMenu("About");
         about.setForeground(Color.BLUE);
+        mb.add(about);
         
-        JMenuItem aboutus = new JMenuItem("About Us");
-        aboutus.setBackground(Color.WHITE);
-        aboutus.addActionListener(this);
-        about.add(aboutus);
+        JMenuItem ab = new JMenuItem("About");
+        ab.setBackground(Color.WHITE);
+        ab.addActionListener(this);
+        about.add(ab);
         
-        //exit
+        // exit
         JMenu exit = new JMenu("Exit");
         exit.setForeground(Color.RED);
+        mb.add(exit);
         
         JMenuItem ex = new JMenuItem("Exit");
         ex.setBackground(Color.WHITE);
         ex.addActionListener(this);
         exit.add(ex);
         
-        mb.add(master);
-        mb.add(user);
-        mb.add(attendance);
-        mb.add(attendance_detail);
-        mb.add(exam);
-        mb.add(report);
-        mb.add(fee);
-        mb.add(utility);
-        mb.add(about);
-        mb.add(exit);
+        setJMenuBar(mb);
         
-        setJMenuBar(mb);    
-        
-        setFont(new Font("Senserif",Font.BOLD,16));
-        setLayout(new FlowLayout());
-        setVisible(false);
+        setVisible(true);
     }
-    public void actionPerformed(ActionEvent ae){
+    
+    public void actionPerformed(ActionEvent ae) {
         String msg = ae.getActionCommand();
-        if(msg.equals("New Student Information")){
-            new AddStudent().setVisible(true);
-            
-        }else if(msg.equals("New Faculty Information")){
-            new AddTeacher().setVisible(true);
-            
-        }else if(msg.equals("View Student Details")){
-            new StudentDetails().setVisible(true);
-            
-        }else if(msg.equals("View Teacher Details")){
-            new TeacherDetails().setVisible(true);
-           
-        }
-        else if(msg.equals("Update Students Details")){
-            new UpdateStudent();
-           
-        }
-        else if(msg.equals("Update Teachers Details")){
-            new UpdateTeacher();
-           
-        }
-        else if(msg.equals("Fee Structure")){
-            new FeeStructure().setVisible(true);
-           
-        }
-        else if(msg.equals("Student Fee Form")){
-            new StudentFeeForm().setVisible(true);
-           
-        }
-        else if(msg.equals("Notepad")){
-            try{
-                Runtime.getRuntime().exec("notepad.exe");
-            }catch(Exception e){ }
-        }else if(msg.equals("Calculator")){
-            try{
-                Runtime.getRuntime().exec("calc.exe");
-            }catch(Exception e){ }
-        }else if(msg.equals("Web Browser")){
-            
-            try{
-                Runtime.getRuntime().exec("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe");
-            }catch(Exception e){ }
-        }else if(msg.equals("Exit")){
-            System.exit(0);
-        }else if(msg.equals("About Us")){
-            new AboutUs().setVisible(true);
-        }else if(msg.equals("Student Leave")){
-            new StudentLeave().setVisible(true);
-        }else if(msg.equals("Teacher Leave")){
-            new TeacherLeave().setVisible(true);
-        }else if(msg.equals("Student Leave Details")){
-            new StudentLeaveDetails().setVisible(true);
-        }else if(msg.equals("Teacher Leave Details")){
-            new TeacherLeaveDetails().setVisible(true);
-        }else if(msg.equals("Examination Details")){
-            new ExaminationDetails().setVisible(true);
-        }else if(msg.equals("Enter Marks")){
-            new EnterMarks().setVisible(true);
-        }
         
+        if (msg.equals("Exit")) {
+            setVisible(false);
+        } else if (msg.equals("Calculator")) {
+            try {
+                Runtime.getRuntime().exec("calc.exe");
+            } catch (Exception e) {
+                
+            }
+        } else if (msg.equals("Notepad")) {
+            try {
+                Runtime.getRuntime().exec("notepad.exe");
+            } catch (Exception e) {
+                
+            }
+        } else if (msg.equals("New Faculty Information")) {
+            new AddTeacher();
+        } else if (msg.equals("New Student Information")) {
+            new AddStudent();
+        } else if (msg.equals("View Faculty Details")) {
+            new TeacherDetails();
+        } else if (msg.equals("View Student Details")) {
+            new StudentDetails();
+        } else if (msg.equals("Faculty Leave")) {
+            new TeacherLeave();
+        } else if (msg.equals("Student Leave")) {
+            new StudentLeave();
+        } else if (msg.equals("Faculty Leave Details")) {
+            new TeacherLeaveDetails();
+        } else if (msg.equals("Student Leave Details")) {
+            new StudentLeaveDetails();
+        } else if (msg.equals("Update Faculty Details")) {
+            new UpdateTeacher();
+        } else if (msg.equals("Update Student Details")) {
+            new UpdateStudent();
+        } else if (msg.equals("Enter Marks")) {
+            new EnterMarks();
+        } else if (msg.equals("Examination Results")) {
+            new ExaminationDetails();
+        } else if (msg.equals("Fee Structure")) {
+            new FeeStructure();
+        } else if (msg.equals("About")) {
+            new About();
+        } else if (msg.equals("Student Fee Form")) {
+            new StudentFeeForm();
+        }
     }
-    
-    
-    public static void main(String[] args){
-        new Project().setVisible(true);
+
+    public static void main(String[] args) {
+        new Project();
     }
-    
 }

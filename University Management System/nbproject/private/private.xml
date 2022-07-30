@@ -3,11 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/JAVA/University-Management-System/University%20Management%20System/src/university/management/system/StudentLeaveDetails.java</file>
-            <file>file:/E:/JAVA/University-Management-System/University%20Management%20System/src/university/management/system/FeeStructure.java</file>
-            <file>file:/E:/JAVA/University-Management-System/University%20Management%20System/src/university/management/system/TeacherLeave.java</file>
-            <file>file:/E:/JAVA/University-Management-System/University%20Management%20System/src/university/management/system/StudentLeave.java</file>
-            <file>file:/E:/JAVA/University-Management-System/University%20Management%20System/src/university/management/system/AddStudent.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/StudentDetails.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/TeacherDetails.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/Splash.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/Login.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/Project.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/AddStudent.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/UpdateStudent.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/ExaminationDetails.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/Marks.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/StudentFeeForm.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/EnterMarks.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/About.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/TeacherLeaveDetails.java</file>
+            <file>file:/C:/Users/ooo/Documents/NetBeansProjects/University%20Management%20System/src/university/management/system/FeeStructure.java</file>
         </group>
     </open-files>
 </project-private>
